@@ -31,16 +31,60 @@ def mostrar_productos(nombres, precios, stock):
 
 def buscar_producto(nombres, precios, stock):
     print("\n=== BUSCAR PRODUCTO ===")
-
     buscar = input("Ingrese el nombre del producto: ").strip().lower()
     encontrado = False
-
     for i in range(len(nombres)):
         if buscar in nombres[i]:
             print("Nombre:", nombres[i])
             print("Precio: S/", precios[i])
             print("Stock:", stock[i])
             encontrado = True
-
     if encontrado == False:
         print("No se encontro el producto.")
+
+def ordenar_productos(nombres, precios, stock):
+    print("\n=== ORDENAR PRODUCTOS ===")
+    if len(nombres) <= 1:
+        print("No hay suficientes productos para ordenar.")
+        return nombres, precios, stock
+    for i in range(len(nombres) - 1):
+        for j in range(len(nombres) - 1 - i):
+            if nombres[j] > nombres[j + 1]:
+
+                temporal = nombres[j]
+                nombres[j] = nombres[j + 1]
+                nombres[j + 1] = temporal
+
+                temporal = precios[j]
+                precios[j] = precios[j + 1]
+                precios[j + 1] = temporal
+
+                temporal = stock[j]
+                stock[j] = stock[j + 1]
+                stock[j + 1] = temporal
+
+    print("Productos ordenados alfabeticamente.")
+    mostrar_productos(nombres, precios, stock)
+
+    return nombres, precios, stock
+
+def actualizar_stock(nombres, precios, stock):
+    print("\n=== ACTUALIZAR STOCK ===")
+    if len(nombres) == 0:
+        print("No hay productos registrados.")
+        return
+    
+    mostrar_productos(nombres, precios, stock)
+    opcion = int(input("Seleccione el numero del producto: "))
+    if opcion < 1 or opcion > len(nombres):
+        print("Opcion incorrecta.")
+    else:
+        posicion = opcion - 1
+        cantidad = int(input("Ingrese las unidades que llegaron: "))
+        if cantidad > 0:
+            stock[posicion] = stock[posicion] + cantidad
+            print("Stock actualizado correctamente.")
+            print("Nuevo stock:", stock[posicion])
+        else:
+            print("La cantidad debe ser mayor que cero.")
+

@@ -1,4 +1,5 @@
 from productos import registrar_producto, mostrar_productos, buscar_producto
+from productos import (registrar_producto, mostrar_productos, buscar_producto, ordenar_productos, actualizar_stock)
 
 nombres = []
 precios = []
@@ -31,10 +32,10 @@ while True:
         buscar_producto(nombres, precios, stock)
 
     elif opcion == "4":
-        print("Esta opcion se implementara en el commit 3.")
+        nombres, precios, stock = ordenar_productos(nombres, precios, stock)
 
     elif opcion == "5":
-        print("Esta opcion se implementara en el commit 3.")
+        actualizar_stock(nombres, precios, stock)
 
     elif opcion == "6":
         print("Esta opcion se implementara en el commit 4.")
