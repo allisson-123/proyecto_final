@@ -88,3 +88,34 @@ def actualizar_stock(nombres, precios, stock):
         else:
             print("La cantidad debe ser mayor que cero.")
 
+def guardar_productos(nombres, precios, stock):
+    archivo = open("productos.txt", "w")
+
+    for i in range(len(nombres)):
+        archivo.write(
+            nombres[i] + ";" + str(precios[i]) + ";" +
+            str(stock[i]) + "\n"
+        )
+
+    archivo.close()
+    print("Productos guardados correctamente.")
+
+def cargar_productos():
+    nombres = []
+    precios = []
+    stock = []
+
+    archivo = open("productos.txt", "a+")
+    archivo.seek(0)
+
+    for linea in archivo:
+        datos = linea.strip().split(";")
+
+        if len(datos) == 3:
+            nombres = nombres + [datos[0]]
+            precios = precios + [float(datos[1])]
+            stock = stock + [int(datos[2])]
+
+    archivo.close()
+
+    return nombres, precios, stock

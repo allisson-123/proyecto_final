@@ -52,3 +52,36 @@ def registrar_venta(nombres, precios, stock):
         print("No se registraron productos en esta venta.")
 
     return total
+
+def guardar_venta(total):
+    archivo = open("registro.txt", "a")
+    archivo.write(str(total) + "\n")
+    archivo.close()
+
+def cargar_ventas():
+    registro_ventas = []
+
+    archivo = open("registro.txt", "a+")
+    archivo.seek(0)
+
+    for linea in archivo:
+        registro_ventas = registro_ventas + [float(linea.strip())]
+
+    archivo.close()
+
+    return registro_ventas
+
+def mostrar_registro(registro_ventas):
+    print("\n=== REGISTRO DE VENTAS ===")
+
+    if len(registro_ventas) == 0:
+        print("Todavia no hay ventas registradas.")
+    else:
+        total_dia = 0
+
+        for i in range(len(registro_ventas)):
+            print("Venta", i + 1, "- S/", registro_ventas[i])
+            total_dia = total_dia + registro_ventas[i]
+
+        print("--------------------")
+        print("Total vendido: S/", total_dia)

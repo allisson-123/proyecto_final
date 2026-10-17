@@ -1,10 +1,22 @@
-from productos import registrar_producto, mostrar_productos, buscar_producto
-from productos import (registrar_producto, mostrar_productos, buscar_producto, ordenar_productos, actualizar_stock)
-from ventas import registrar_venta
+from productos import (
+    registrar_producto,
+    mostrar_productos,
+    buscar_producto,
+    ordenar_productos,
+    actualizar_stock,
+    guardar_productos,
+    cargar_productos
+)
 
-nombres = []
-precios = []
-stock = []
+from ventas import (
+    registrar_venta,
+    guardar_venta,
+    cargar_ventas,
+    mostrar_registro
+)
+
+nombres, precios, stock = cargar_productos()
+registro_ventas = cargar_ventas()
 
 print("================================")
 print("      MINIMARKET TOKE")
@@ -25,6 +37,7 @@ while True:
 
     if opcion == "1":
         nombres, precios, stock = registrar_producto(nombres, precios, stock)
+        guardar_productos(nombres, precios, stock)
 
     elif opcion == "2":
         mostrar_productos(nombres, precios, stock)
@@ -34,18 +47,26 @@ while True:
 
     elif opcion == "4":
         nombres, precios, stock = ordenar_productos(nombres, precios, stock)
+        guardar_productos(nombres, precios, stock)
 
     elif opcion == "5":
         actualizar_stock(nombres, precios, stock)
+        guardar_productos(nombres, precios, stock)
 
     elif opcion == "6":
         total = registrar_venta(nombres, precios, stock)
 
+        if total > 0:
+            registro_ventas = registro_ventas + [total]
+            guardar_venta(total)
+            guardar_productos(nombres, precios, stock)
+
     elif opcion == "7":
-        print("Esta opcion se implementara en el commit 5.")
+        mostrar_registro(registro_ventas)
 
     elif opcion == "8":
         print("Gracias por usar el sistema TOKE.")
+        guardar_productos(nombres, precios, stock)
         break
 
     else:
