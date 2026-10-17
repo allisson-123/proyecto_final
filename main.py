@@ -1,5 +1,6 @@
 from productos import registrar_producto, mostrar_productos, buscar_producto
 from productos import (registrar_producto, mostrar_productos, buscar_producto, ordenar_productos, actualizar_stock)
+from ventas import registrar_venta
 
 nombres = []
 precios = []
@@ -38,7 +39,7 @@ while True:
         actualizar_stock(nombres, precios, stock)
 
     elif opcion == "6":
-        print("Esta opcion se implementara en el commit 4.")
+        total = registrar_venta(nombres, precios, stock)
 
     elif opcion == "7":
         print("Esta opcion se implementara en el commit 5.")
