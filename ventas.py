@@ -1,6 +1,5 @@
 def registrar_venta(nombres, precios, stock):
     print("\n=== REGISTRAR VENTA ===")
-
     if len(nombres) == 0:
         print("No hay productos registrados.")
         return 0
@@ -14,8 +13,7 @@ def registrar_venta(nombres, precios, stock):
             print(
                 i + 1, "-", nombres[i],
                 "| Precio: S/", precios[i],
-                "| Stock:", stock[i]
-            )
+                "| Stock:", stock[i])
 
         print("0. Terminar venta")
 

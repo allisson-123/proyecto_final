@@ -1,3 +1,4 @@
 arroz;4.5;23
 azucar;3.8;15
 galleta picaras;2.0;8
+chocolate triangulo;1.8;5

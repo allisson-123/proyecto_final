@@ -6,7 +6,7 @@ from productos import (
     actualizar_stock,
     guardar_productos,
     cargar_productos
-)
+    )
 
 from ventas import (
     registrar_venta,
