@@ -1,4 +1,4 @@
-arroz;4.5;19
-azucar;3.8;15
+arroz;4.5;18
+azucar;3.8;12
 galleta picaras;2.0;8
 chocolate triangulo;1.8;5

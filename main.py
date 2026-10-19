@@ -12,7 +12,8 @@ from ventas import (
     registrar_venta,
     guardar_venta,
     cargar_ventas,
-    mostrar_registro
+    mostrar_registro,
+    mostrar_ventas_diarias
 )
 
 nombres, precios, stock = cargar_productos()
@@ -31,7 +32,8 @@ while True:
     print("5. Actualizar stock")
     print("6. Registrar venta")
     print("7. Ver registro de ventas")
-    print("8. Salir")
+    print("8. Ver ventas diarias")
+    print("9. Salir")
 
     opcion = input("Seleccione una opcion: ")
 
@@ -65,6 +67,9 @@ while True:
         mostrar_registro(registro_ventas)
 
     elif opcion == "8":
+        mostrar_ventas_diarias()
+
+    elif opcion == "9":
         print("Gracias por usar el sistema TOKE.")
         guardar_productos(nombres, precios, stock)
         break

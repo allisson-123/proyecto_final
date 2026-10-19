@@ -142,3 +142,28 @@ def mostrar_registro(registro_ventas):
 
         print("--------------------")
         print("Total vendido: S/", total_dia)
+
+def mostrar_ventas_diarias():
+    print("\n=== VENTAS DIARIAS ===")
+    fecha_buscar = input("Ingrese la fecha (DD/MM/AAAA): ")
+
+    archivo = open("comprobantes.txt", "r")
+    fecha = ""
+    total_dia = 0
+    cantidad_ventas = 0
+
+    for linea in archivo:
+        if "Fecha:" in linea:
+            fecha = linea.replace("Fecha:", "").strip()
+
+        if "TOTAL:" in linea and fecha == fecha_buscar:
+            total = float(linea.split("S/ ")[1])
+            total_dia = total_dia + total
+            cantidad_ventas = cantidad_ventas + 1
+            print("Venta:", "S/", total)
+
+    archivo.close()
+
+    print("----------------------")
+    print("Cantidad de ventas:", cantidad_ventas)
+    print("Total del dia: S/", format(total_dia, ".2f"))
