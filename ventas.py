@@ -1,10 +1,17 @@
+from datetime import datetime
+
 def registrar_venta(nombres, precios, stock):
     print("\n=== REGISTRAR VENTA ===")
+
     if len(nombres) == 0:
         print("No hay productos registrados.")
         return 0
 
     total = 0
+    productos_vendidos = []
+    cantidades = []
+    precios_venta = []
+    subtotales = []
 
     while True:
         print("\n=== PRODUCTOS DISPONIBLES ===")
@@ -40,21 +47,72 @@ def registrar_venta(nombres, precios, stock):
                 total = total + subtotal
                 stock[posicion] = stock[posicion] - cantidad
 
+                productos_vendidos = productos_vendidos + [nombres[posicion]]
+                cantidades = cantidades + [cantidad]
+                precios_venta = precios_venta + [precios[posicion]]
+                subtotales = subtotales + [subtotal]
+
                 print("Producto vendido correctamente.")
                 print("Subtotal: S/", subtotal)
 
     if total > 0:
-        print("\nTotal de la venta: S/", total)
+        fecha = datetime.now().strftime("%d/%m/%Y")
+        hora = datetime.now().strftime("%H:%M:%S")
+
+        print("\n================================")
+        print("       MINIMARKET TOKE")
+        print("      COMPROBANTE DE VENTA")
+        print("================================")
+        print("Fecha:", fecha)
+        print("Hora:", hora)
+        print("--------------------------------")
+
+        for i in range(len(productos_vendidos)):
+            print("Producto:", productos_vendidos[i])
+            print("Cantidad:", cantidades[i])
+            print("Precio: S/", format(precios_venta[i], ".2f"))
+            print("Subtotal: S/", format(subtotales[i], ".2f"))
+            print("--------------------------------")
+
+        print("TOTAL: S/", format(total, ".2f"))
+        print("================================")
+        print("      Gracias por su compra")
+        print("================================")
+
+        archivo = open("comprobantes.txt", "a")
+        archivo.write("================================\n")
+        archivo.write("       MINIMARKET TOKE\n")
+        archivo.write("      COMPROBANTE DE VENTA\n")
+        archivo.write("================================\n")
+        archivo.write("Fecha: " + fecha + "\n")
+        archivo.write("Hora: " + hora + "\n")
+        archivo.write("--------------------------------\n")
+
+        for i in range(len(productos_vendidos)):
+            archivo.write("Producto: " + productos_vendidos[i] + "\n")
+            archivo.write("Cantidad: " + str(cantidades[i]) + "\n")
+            archivo.write("Precio: S/ " + format(precios_venta[i], ".2f") + "\n")
+            archivo.write("Subtotal: S/ " + format(subtotales[i], ".2f") + "\n")
+            archivo.write("--------------------------------\n")
+
+        archivo.write("TOTAL: S/ " + format(total, ".2f") + "\n")
+        archivo.write("================================\n\n")
+        archivo.close()
+
+        print("Comprobante guardado en comprobantes.txt")
         print("Venta finalizada.")
+
     else:
         print("No se registraron productos en esta venta.")
 
     return total
 
+
 def guardar_venta(total):
     archivo = open("registro.txt", "a")
     archivo.write(str(total) + "\n")
     archivo.close()
+
 
 def cargar_ventas():
     registro_ventas = []
@@ -68,6 +126,7 @@ def cargar_ventas():
     archivo.close()
 
     return registro_ventas
+
 
 def mostrar_registro(registro_ventas):
     print("\n=== REGISTRO DE VENTAS ===")
