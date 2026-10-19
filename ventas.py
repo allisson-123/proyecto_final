@@ -56,6 +56,37 @@ def registrar_venta(nombres, precios, stock):
                 print("Subtotal: S/", subtotal)
 
     if total > 0:
+        print("\n=== MÉTODO DE PAGO ===")
+        print("1. Efectivo")
+        print("2. Tarjeta de crédito/débito")
+        print("3. Yape")
+        print("4. Plin")
+        
+        metodo = input("Seleccione el método de pago: ")
+        
+        if metodo == "1":
+            metodo_pago = "Efectivo"
+            monto = float(input("Ingrese el monto entregado por el cliente: "))
+            while monto < total:
+                print("El monto entregado no es suficiente. Ingrese un monto válido.")
+                monto = float(input("Ingrese el monto entregado por el cliente: "))
+            
+            vuelto = monto - total
+            print("Vuelto a entregar al cliente: S/", format(vuelto, ".2f"))
+            
+        elif metodo == "2":
+            metodo_pago = "Tarjeta de crédito/débito"
+            vuelto=0
+        elif metodo == "3":
+            metodo_pago = "Yape"
+            vuelto=0
+        elif metodo == "4":
+            metodo_pago = "Plin"
+            vuelto=0
+        else:
+            metodo_pago = "Método de pago no especificado"
+            print("Opción de pago no válida.")
+            
         fecha = datetime.now().strftime("%d/%m/%Y")
         hora = datetime.now().strftime("%H:%M:%S")
 
@@ -65,6 +96,10 @@ def registrar_venta(nombres, precios, stock):
         print("================================")
         print("Fecha:", fecha)
         print("Hora:", hora)
+        print("Método de pago:", metodo_pago)
+        if metodo_pago == "Efectivo":
+            print("Monto recibido: S/", format(monto, ".2f"))
+            print("Vuelto: S/", format(vuelto, ".2f"))
         print("--------------------------------")
 
         for i in range(len(productos_vendidos)):
@@ -86,6 +121,10 @@ def registrar_venta(nombres, precios, stock):
         archivo.write("================================\n")
         archivo.write("Fecha: " + fecha + "\n")
         archivo.write("Hora: " + hora + "\n")
+        archivo.write("Método de pago: " + metodo_pago + "\n")
+        if metodo_pago == "Efectivo":
+            archivo.write("Monto recibido: S/ " + format(monto, ".2f") + "\n")
+            archivo.write("Vuelto: S/ " + format(vuelto, ".2f") + "\n")
         archivo.write("--------------------------------\n")
 
         for i in range(len(productos_vendidos)):
