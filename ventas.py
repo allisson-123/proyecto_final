@@ -86,6 +86,7 @@ def registrar_venta(nombres, precios, stock):
         print("Metodo de pago:", metodo_pago)
 
         if metodo_pago == "Efectivo":
+            print("Monto recibido: S/", format(monto, ".2f"))
             print("Vuelto: S/", format(vuelto, ".2f"))
 
         print("--------------------------------")
@@ -104,13 +105,13 @@ def registrar_venta(nombres, precios, stock):
         archivo.write("       MINIMARKET TOKE\n")
         archivo.write("      COMPROBANTE DE VENTA\n")
         archivo.write("================================\n")
-        archivo.write("Fecha: " + fecha + "\n")
+        archivo.write("Fecha: " + fecha + "\n") 
         archivo.write("Hora: " + hora + "\n")
         archivo.write("Metodo de pago: " + metodo_pago + "\n")
-
         if metodo_pago == "Efectivo":
+            archivo.write("Monto recibido: S/ " + format(monto, ".2f") + "\n")
             archivo.write("Vuelto: S/ " + format(vuelto, ".2f") + "\n")
-        archivo.write("--------------------------------\n")
+        archivo.write("--------------------------------\n")       
         for i in range(len(productos_vendidos)):
             archivo.write("Producto: " + productos_vendidos[i] + "\n")
             archivo.write("Cantidad: " + str(cantidades[i]) + "\n")
