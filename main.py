@@ -38,8 +38,11 @@ while True:
     opcion = input("Seleccione una opcion: ")
 
     if opcion == "1":
+        nombres_antes = len(nombres)
         nombres, precios, stock = registrar_producto(nombres, precios, stock)
-        guardar_productos(nombres, precios, stock)
+        
+        if len(nombres) > nombres_antes:
+            guardar_productos(nombres, precios, stock)
 
     elif opcion == "2":
         mostrar_productos(nombres, precios, stock)
@@ -52,8 +55,10 @@ while True:
         guardar_productos(nombres, precios, stock)
 
     elif opcion == "5":
+        stock_antes = stock[:]
         actualizar_stock(nombres, precios, stock)
-        guardar_productos(nombres, precios, stock)
+        if stock != stock_antes:
+            guardar_productos(nombres, precios, stock)
 
     elif opcion == "6":
         total = registrar_venta(nombres, precios, stock)
