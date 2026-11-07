@@ -1,5 +1,6 @@
-arroz;4.5;23
+arroz;4.5;20
 azucar;3.8;12
+chocolate sublime;2.3;13
 chocolate triangulo;1.8;5
 galleta picaras;2.0;8
 leche;4.5;10

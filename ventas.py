@@ -42,39 +42,34 @@ def registrar_venta(nombres, precios, stock):
                     print("Subtotal: S/", subtotal)
         except ValueError:
             print("Debe ingresar un numero valido.")
-
     if total > 0:
         print("\n=== METODO DE PAGO ===")
         print("1. Efectivo")
         print("2. Tarjeta")
         print("3. Yape")
         print("4. Plin")
-
         metodo = input("Seleccione el metodo de pago: ")
-
         while metodo != "1" and metodo != "2" and metodo != "3" and metodo != "4":
             print("Opcion de pago incorrecta.")
             metodo = input("Seleccione el metodo de pago: ")
-
         if metodo == "1":
             metodo_pago = "Efectivo"
-            monto = float(input("Ingrese el monto entregado: "))
-
-            while monto < total:
-                print("El monto no es suficiente.")
-                monto = float(input("Ingrese el monto entregado: "))
-
-            vuelto = monto - total
-
+            while True:
+                try:
+                    monto = float(input("Ingrese el monto entregado: "))
+                    if monto < total:
+                        print("El monto no es suficiente.")
+                    else:
+                        break
+                except ValueError:
+                    print("Debe ingresar un monto numerico valido.")
+            vuelto = monto - total            
         elif metodo == "2":
             metodo_pago = "Tarjeta"
-
         elif metodo == "3":
             metodo_pago = "Yape"
-
         else:
             metodo_pago = "Plin"
-
         fecha = datetime.now().strftime("%d/%m/%Y")
         hora = datetime.now().strftime("%H:%M:%S")
         print("\n================================")
@@ -84,11 +79,9 @@ def registrar_venta(nombres, precios, stock):
         print("Fecha:", fecha)
         print("Hora:", hora)
         print("Metodo de pago:", metodo_pago)
-
         if metodo_pago == "Efectivo":
             print("Monto recibido: S/", format(monto, ".2f"))
             print("Vuelto: S/", format(vuelto, ".2f"))
-
         print("--------------------------------")
         for i in range(len(productos_vendidos)):
             print("Producto:", productos_vendidos[i])

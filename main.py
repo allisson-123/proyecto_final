@@ -51,8 +51,10 @@ while True:
         buscar_producto(nombres, precios, stock)
 
     elif opcion == "4":
+        nombres_antes = nombres[:]
         nombres, precios, stock = ordenar_productos(nombres, precios, stock)
-        guardar_productos(nombres, precios, stock)
+        if nombres != nombres_antes:
+            guardar_productos(nombres, precios, stock)
 
     elif opcion == "5":
         stock_antes = stock[:]

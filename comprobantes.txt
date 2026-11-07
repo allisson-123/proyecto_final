@@ -51,3 +51,21 @@ Subtotal: S/ 9.00
 TOTAL: S/ 9.00
 ================================
 
+================================
+       MINIMARKET TOKE
+      COMPROBANTE DE VENTA
+================================
+Fecha: 03/11/2026
+Hora: 20:48:19
+Metodo de pago: Efectivo
+Monto recibido: S/ 15.00
+Vuelto: S/ 1.50
+--------------------------------
+Producto: arroz
+Cantidad: 3
+Precio: S/ 4.50
+Subtotal: S/ 13.50
+--------------------------------
+TOTAL: S/ 13.50
+================================
+

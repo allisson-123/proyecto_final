@@ -84,13 +84,18 @@ def actualizar_stock(nombres, precios, stock):
             print("Opcion incorrecta.")
             return
         posicion = opcion - 1
-        cantidad = int(input("Ingrese las unidades que llegaron: "))
-        if cantidad > 0:
-            stock[posicion] = stock[posicion] + cantidad
-            print("Stock actualizado correctamente.")
-            print("Nuevo stock:", stock[posicion])
-        else:
-            print("La cantidad debe ser mayor que cero.")
+        while True:
+            try:
+                cantidad = int(input("Ingrese las unidades que llegaron: "))
+                if cantidad > 0:
+                    stock[posicion] = stock[posicion] + cantidad
+                    print("Stock actualizado correctamente.")
+                    print("Nuevo stock:", stock[posicion])
+                    break
+                else:
+                    print("La cantidad debe ser mayor que cero.")
+            except ValueError:
+                print("Debe ingresar un numero valido.")
     except ValueError:
         print("Debe ingresar un numero valido.")
 def guardar_productos(nombres, precios, stock):
