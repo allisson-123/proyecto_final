@@ -39,7 +39,7 @@ TOTAL: S/ 15.90
 ================================
 Fecha: 19/10/2026
 Hora: 08:44:10
-Método de pago: Efectivo
+Metodo de pago: Efectivo
 Monto recibido: S/ 12.00
 Vuelto: S/ 3.00
 --------------------------------
