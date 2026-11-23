@@ -1,16 +1,18 @@
 def registrar_producto(nombres, precios, stock):
     print("\n=== REGISTRAR PRODUCTO ===")
-    nombre = input("Ingrese el nombre del producto: ").strip().lower()
-    if nombre == "":
-        print("El nombre no puede estar vacio.")
-        return nombres, precios, stock
-    repetido = False
-    for i in range(len(nombres)):
-        if nombre == nombres[i]:
-            repetido = True
-    if repetido == True:
-        print("Este producto ya se encuentra registrado.")
-        return nombres, precios, stock
+    while True:
+        nombre = input("Ingrese el nombre del producto: ").strip().lower()
+        if nombre == "":
+            print("El nombre no puede estar vacio.")
+        else:
+            repetido = False
+            for i in range(len(nombres)):
+                if nombre == nombres[i]:
+                    repetido = True
+            if repetido == True:
+                print("Este producto ya se encuentra registrado.")
+            else:
+                break
     try:
         precio = float(input("Ingrese el precio: "))
         cantidad = int(input("Ingrese la cantidad disponible: "))
@@ -28,7 +30,9 @@ def registrar_producto(nombres, precios, stock):
     return nombres, precios, stock
 def mostrar_productos(nombres, precios, stock):
     print("\n=== LISTA DE PRODUCTOS ===")
-    if len(nombres) == 0:
+    if len(nombres) != len(precios) or len(nombres) != len(stock):
+        print("Error: los datos de los productos no coinciden.")
+    elif len(nombres) == 0:
         print("No hay productos registrados.")
     else:
         for i in range(len(nombres)):
@@ -36,7 +40,7 @@ def mostrar_productos(nombres, precios, stock):
                 i + 1, "-", nombres[i],
                 "| Precio: S/", precios[i],
                 "| Stock:", stock[i]
-                )
+            )
 def buscar_producto(nombres, precios, stock):
     print("\n=== BUSCAR PRODUCTO ===")
     buscar = input("Ingrese el nombre del producto: ").strip().lower()
@@ -99,6 +103,9 @@ def actualizar_stock(nombres, precios, stock):
     except ValueError:
         print("Debe ingresar un numero valido.")
 def guardar_productos(nombres, precios, stock):
+    if len(nombres) != len(precios) or len(nombres) != len(stock):
+        print("Error: los datos de los productos no coinciden.")
+        return
     archivo = open("productos.txt", "w")
     for i in range(len(nombres)):
         archivo.write(
@@ -116,8 +123,14 @@ def cargar_productos():
     for linea in archivo:
         datos = linea.strip().split(";")
         if len(datos) == 3:
-            nombres = nombres + [datos[0]]
-            precios = precios + [float(datos[1])]
-            stock = stock + [int(datos[2])]
+            try:
+                precio = float(datos[1])
+                cantidad = int(datos[2])
+                if datos[0] != "" and precio > 0 and cantidad >= 0:
+                    nombres = nombres + [datos[0]]
+                    precios = precios + [precio]
+                    stock = stock + [cantidad]
+            except ValueError:
+                print("Se encontro un registro incorrecto en el archivo.")
     archivo.close()
     return nombres, precios, stock
